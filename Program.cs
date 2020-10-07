@@ -11,9 +11,11 @@ namespace Tic_Tac_Toe_Game_Code
         {
             char[] board = createBoard();
             displayBoard(board);
+            Player player = FirstMovement();
             char playerCharacter = ChooseLetter();
             int userMovement = Movement(board);
             CheckSpace(board, userMovement, playerCharacter);
+            Console.WriteLine(" Check if won: " + CheckWinner(board, playerCharacter));
         }
         private static char[] createBoard()
         {
@@ -66,6 +68,10 @@ namespace Tic_Tac_Toe_Game_Code
         {
             Random random = new Random();
             return (int)(random.Next() * 10) % choices;
+        }
+        private static bool CheckWinner(char[] b, char ch)
+        {
+            return ((b[1]==ch&&b[2]==ch&&b[3]==ch)||(b[4]==ch&&b[5]==ch&&b[6]==ch)||(b[7]==ch&&b[8]==ch&&b[9]==ch)||(b[1]==ch&&b[4]==ch&&b[7]==ch)||(b[2]==ch&&b[5]==ch&&b[8]==ch)||(b[3]==ch&&b[6]==ch&&b[9]==ch)||(b[1]==ch&&b[5]==ch&&b[9]==ch)||(b[3]==ch&&b[5]==ch&&b[7]==ch));
         }
     }
 }
