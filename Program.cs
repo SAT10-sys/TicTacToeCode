@@ -83,6 +83,10 @@ namespace Tic_Tac_Toe_Game_Code
             int playerMove = getWinningMove(board, playerCharacter);
             if (playerMove != 0)
                 return playerMove;
+            int[] cornerIndices = { 1, 3, 7, 9 };
+            int compMove = getRandomMove(board, cornerIndices);
+            if (compMove != 0)
+                return compMove;
             return 0;
         }
         private static int getWinningMove(char[] board, char letter)
@@ -105,6 +109,15 @@ namespace Tic_Tac_Toe_Game_Code
         {
             char[] boardCopy = new char[10];
             return boardCopy;
+        }
+        private static int getRandomMove(char[] board, int[] moves)
+        {
+            for(int i=0;i<moves.Length;i++)
+            {
+                if (isEligible(board, moves[i]))
+                    return moves[i];
+            }
+            return 0;
         }
     }
 }
