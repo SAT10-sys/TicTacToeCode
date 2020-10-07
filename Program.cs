@@ -13,9 +13,11 @@ namespace Tic_Tac_Toe_Game_Code
             displayBoard(board);
             Player player = FirstMovement();
             char playerCharacter = ChooseLetter();
+            char computerCharacter = ChooseLetter();
             int userMovement = Movement(board);
             CheckSpace(board, userMovement, playerCharacter);
             Console.WriteLine(" Check if won: " + CheckWinner(board, playerCharacter));
+            int computerMove = getComputerMove(board, computerCharacter);
         }
         private static char[] createBoard()
         {
@@ -72,6 +74,34 @@ namespace Tic_Tac_Toe_Game_Code
         private static bool CheckWinner(char[] b, char ch)
         {
             return ((b[1]==ch&&b[2]==ch&&b[3]==ch)||(b[4]==ch&&b[5]==ch&&b[6]==ch)||(b[7]==ch&&b[8]==ch&&b[9]==ch)||(b[1]==ch&&b[4]==ch&&b[7]==ch)||(b[2]==ch&&b[5]==ch&&b[8]==ch)||(b[3]==ch&&b[6]==ch&&b[9]==ch)||(b[1]==ch&&b[5]==ch&&b[9]==ch)||(b[3]==ch&&b[5]==ch&&b[7]==ch));
+        }
+        private static int getComputerMove(char[] board, char computerCharacter)
+        {
+            int winningMove = getWinningMove(board, computerCharacter);
+            if (winningMove != 0)
+                return winningMove;
+            return 0;
+        }
+        private static int getWinningMove(char[] board, char letter)
+        {
+            for(int i=1;i<board.Length;i++)
+            {
+                char[] copyOfBoard = getCopyOfBoard(board);
+                if(isEligible(copyOfBoard,i))
+                {
+                    CheckSpace(copyOfBoard, i, letter);
+                }
+                if(CheckWinner(copyOfBoard, letter))
+                {
+                    return i;
+                }
+            }
+            return 0;
+        }
+        private static char[] getCopyOfBoard(char[] board)
+        {
+            char[] boardCopy = new char[10];
+            return boardCopy;
         }
     }
 }
