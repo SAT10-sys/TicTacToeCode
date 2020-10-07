@@ -8,7 +8,9 @@ namespace Tic_Tac_Toe_Game_Code
         {
             char[] board = createBoard();
             displayBoard(board);
+            char playerCharacter = ChooseLetter();
             int userMovement = Movement(board);
+            CheckSpace(board, userMovement, playerCharacter);
         }
         private static char[] createBoard()
         {
@@ -45,6 +47,12 @@ namespace Tic_Tac_Toe_Game_Code
         private static bool isEligible(char[] board, int position)
         {
             return board[position] == ' ';
+        }
+        private static void CheckSpace(char[] board, int position, char playerCharacter)
+        {
+            bool freeSpace = isEligible(board, position);
+            if (freeSpace)
+                board[position] = playerCharacter;
         }
     }
 }
