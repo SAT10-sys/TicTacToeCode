@@ -2,11 +2,18 @@
 
 namespace Tic_Tac_Toe_Game_Code
 {
-    class Program
+    public class TicTacToeGame
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(" Welcome to Online Tic Tac Toe Game ");
+            char[] board = createBoard();
+        }
+        private static char[] createBoard()
+        {
+            char[] board = new char[10];
+            for (int i = 0; i < board.Length; i++)
+                board[i] = ' ';
+            return board;
         }
     }
 }
