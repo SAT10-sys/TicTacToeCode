@@ -7,8 +7,8 @@ namespace Tic_Tac_Toe_Game_Code
         static void Main(string[] args)
         {
             char[] board = createBoard();
-            char playerCharacter = ChooseLetter();
             displayBoard(board);
+            int userMovement = Movement(board);
         }
         private static char[] createBoard()
         {
@@ -30,6 +30,21 @@ namespace Tic_Tac_Toe_Game_Code
             Console.WriteLine(" " + board[4] + " | " + board[5] + " | " + board[6]);
             Console.WriteLine(" ------------------------ ");
             Console.WriteLine(" " + board[7] + " | " + board[8] + " | " + board[9]);
+        }
+        private static int Movement(char[] board)
+        {
+            int[] indices = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            while(true)
+            {
+                Console.WriteLine(" Choose your move ");
+                int position = Convert.ToInt32(Console.ReadLine());
+                if (Array.Find<int>(indices, element => element == position) != 0 && isEligible(board, position))
+                    return position;
+            }
+        }
+        private static bool isEligible(char[] board, int position)
+        {
+            return board[position] == ' ';
         }
     }
 }
