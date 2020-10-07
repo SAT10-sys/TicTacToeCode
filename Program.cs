@@ -17,7 +17,7 @@ namespace Tic_Tac_Toe_Game_Code
             int userMovement = Movement(board);
             CheckSpace(board, userMovement, playerCharacter);
             Console.WriteLine(" Check if won: " + CheckWinner(board, playerCharacter));
-            int computerMove = getComputerMove(board, computerCharacter);
+            int computerMove = getComputerMove(board, computerCharacter, playerCharacter);
         }
         private static char[] createBoard()
         {
@@ -75,11 +75,14 @@ namespace Tic_Tac_Toe_Game_Code
         {
             return ((b[1]==ch&&b[2]==ch&&b[3]==ch)||(b[4]==ch&&b[5]==ch&&b[6]==ch)||(b[7]==ch&&b[8]==ch&&b[9]==ch)||(b[1]==ch&&b[4]==ch&&b[7]==ch)||(b[2]==ch&&b[5]==ch&&b[8]==ch)||(b[3]==ch&&b[6]==ch&&b[9]==ch)||(b[1]==ch&&b[5]==ch&&b[9]==ch)||(b[3]==ch&&b[5]==ch&&b[7]==ch));
         }
-        private static int getComputerMove(char[] board, char computerCharacter)
+        private static int getComputerMove(char[] board, char computerCharacter, char playerCharacter)
         {
             int winningMove = getWinningMove(board, computerCharacter);
             if (winningMove != 0)
                 return winningMove;
+            int playerMove = getWinningMove(board, playerCharacter);
+            if (playerMove != 0)
+                return playerMove;
             return 0;
         }
         private static int getWinningMove(char[] board, char letter)
