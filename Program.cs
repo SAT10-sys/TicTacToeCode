@@ -13,7 +13,7 @@ namespace Tic_Tac_Toe_Game_Code
             displayBoard(board);
             Player player = FirstMovement();
             char playerCharacter = ChooseLetter();
-            char computerCharacter = ChooseLetter();
+            char computerCharacter = (playerCharacter == 'X') ? '0' : 'X';
             int userMovement = Movement(board);
             CheckSpace(board, userMovement, playerCharacter);
             Console.WriteLine(" Check if won: " + CheckWinner(board, playerCharacter));
@@ -85,6 +85,12 @@ namespace Tic_Tac_Toe_Game_Code
                 return playerMove;
             int[] cornerIndices = { 1, 3, 7, 9 };
             int compMove = getRandomMove(board, cornerIndices);
+            if (compMove != 0)
+                return compMove;
+            if (isEligible(board, 5))
+                return 5;
+            int[] sideIndices = { 2, 4, 6, 8 };
+            compMove = getRandomMove(board, sideIndices);
             if (compMove != 0)
                 return compMove;
             return 0;
