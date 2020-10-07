@@ -4,6 +4,9 @@ namespace Tic_Tac_Toe_Game_Code
 {
     public class TicTacToeGame
     {
+        public const int HEAD = 0;
+        public const int TAIL = 1;
+        public enum Player { USER,COMPUTER};
         static void Main(string[] args)
         {
             char[] board = createBoard();
@@ -53,6 +56,16 @@ namespace Tic_Tac_Toe_Game_Code
             bool freeSpace = isEligible(board, position);
             if (freeSpace)
                 board[position] = playerCharacter;
+        }
+        private static Player FirstMovement()
+        {
+            int toss = selectRandomChoices(2);
+            return (toss == HEAD) ? Player.USER : Player.COMPUTER;
+        }
+        private static int selectRandomChoices(int choices)
+        {
+            Random random = new Random();
+            return (int)(random.Next() * 10) % choices;
         }
     }
 }
